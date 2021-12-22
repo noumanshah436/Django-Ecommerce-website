@@ -1,0 +1,42 @@
+Check Python
+check pip
+create project
+connect database in setting.py
+
+
+
+Part 2
+1. Create App = store
+2. Register The app in settings.py
+3. INclude the app's urls.py file in the main urls file
+4. create the templates structure
+5. Create the home path and views function and render the index.html template
+
+
+part 3:
+1. create category and product models and register in admin.py file
+2. make migrations and migrate 
+	(env) D:\Python Django Project\Ecommerce Website>       python manage.py makemigration
+	(env) D:\Python Django Project\Ecommerce Website>	pythom manage.py migrate
+3. create superuser  
+	
+	python manage.py createsuperuser
+
+	(env) D:\Python Django Project\Ecommerce Website>python manage.py createsuperuser
+	Username (leave blank to use 'nouman'):
+	Email address: noumanrehman042@gmail.com
+	Password: 1234 (invisible)
+	Password (again):1234
+	This password is too short. It must contain at least 8 characters.
+	This password is too common.
+	This password is entirely numeric.
+	Bypass password validation and create user anyway? [y/N]: y
+	Superuser created successfully.
+
+4. pip install django-jazzmin
+  and register it in installed apps as 'jazzmin' in settings.py file
+
+
+
+
+
