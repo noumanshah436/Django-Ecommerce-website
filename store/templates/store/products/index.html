@@ -1,31 +1,32 @@
 {% extends 'store/layouts/main.html' %}
 
 {% block content %}
-
     <div class="py-3 bg-primary">
         <div class="container">
             <a class="text-white" href="{% url 'home' %}"> Home / </a>
-            <a class="text-white" href="{% url 'collections' %}"> Collections </a>
+            <a class="text-white" href="{% url 'collections' %}"> Collections / </a>
+            <a class="text-white" href="{% url 'collectionsViews' category.slug %}"> {{ category.name }} </a>
         </div>
     </div>
     <div class="container">
 
         <div class="row">
             <div class="col-md-12">
-                <h1>Collections</h1>
+                <h1>{{ category.name }}</h1>
                 <hr>
-                <div class="row mb-5">
-                    {% for item in categories %}
+                <div class="row">
+                    {% for item in products %}
                         <div class="col-md-3">
-                            <div class="card " style=" margin-bottom: 21px;">
-                                <a href="{% url 'collectionsViews' item.slug %}">
+                            <div class="card "  style=" margin-bottom: 21px;">
+                                <a href="{% url 'productViews' item.category.slug  item.slug %}">
                                     <div class="card-body">
                                         <div class="category-image">
-                                            <img alt="Category imaege" class="card-img-top "
-                                                 src="{{ item.image.url }}"/>
+                                            <img alt="Product image" class="card-img-top "
+                                                 src="{{ item.product_image.url }}"/>
                                         </div>
                                         <h2 class="text-center mt-3">{{ item.name }}</h2>
-
+                                        <span class="float-start">{{ item.original_price | stringformat:'d' }}</span>
+                                        <span class="float-end">{{ item.selling_price | stringformat:'d' }}</span>
                                     </div>
                                 </a>
                             </div>
