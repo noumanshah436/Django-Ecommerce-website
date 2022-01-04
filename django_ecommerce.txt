@@ -18,6 +18,8 @@ part 3:
 2. make migrations and migrate 
 	(env) D:\Python Django Project\Ecommerce Website>       python manage.py makemigration
 	(env) D:\Python Django Project\Ecommerce Website>	pythom manage.py migrate
+
+
 3. create superuser  
 	
 	python manage.py createsuperuser
@@ -33,10 +35,15 @@ part 3:
 	Bypass password validation and create user anyway? [y/N]: y
 	Superuser created successfully.
 
+
 4. pip install django-jazzmin
   and register it in installed apps as 'jazzmin' in settings.py file
 
 
+8. Django Ecommerce Part 8 | User registration in django | Custom User register form using bootstrap
+	User registration in django:
+
+https://www.youtube.com/watch?v=q6oxoOxvUMk&list=PL_99hMDlL4d2zsGU5nOgADmRc6A8msXyh&index=8
 
 
 
