@@ -12,7 +12,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h1>Collections</h1>
+{#                <h1>Collections</h1>#}
                 <hr>
                 <div class="row mb-5">
                     {% for item in categories %}
@@ -21,10 +21,10 @@
                                 <a href="{% url 'collectionsViews' item.slug %}">
                                     <div class="card-body">
                                         <div class="category-image">
-                                            <img alt="Category imaege" class="card-img-top "
+                                            <img alt="Category image" class="card-img-top "
                                                  src="{{ item.image.url }}"/>
                                         </div>
-                                        <h2 class="text-center mt-3">{{ item.name }}</h2>
+                                        <h4 class="text-center mt-3">{{ item.name }}</h4>
 
                                     </div>
                                 </a>
