@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     'jazzmin',
     "django.contrib.admin",
     "django.contrib.auth",
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'store.apps.StoreConfig',
+    "users.apps.UsersConfig"
 
 ]
 
@@ -113,12 +115,10 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -134,3 +134,9 @@ MEDIA_URL = '/media/'
 # ]
 
 # my BASE_DIR  =   D:\Python Django Project\Ecommerce Website
+
+# to to change default path if login of a user is successful
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

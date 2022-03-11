@@ -1,22 +1,27 @@
-# from django.shortcuts import render, redirect
-# from django.contrib import messages
-# from django.contrib.auth import authenticate, login , logout
-# from store.forms import CustomUserForm
-#
-#
-# def register(request):
-#     form = CustomUserForm()
-#     if request.method == 'POST':
-#         form = CustomUserForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, "Registered Successfully!")
-#             return redirect('/login')
-#
-#     context = {'form': form}
-#     return render(request, "store/auth/register.html", context)
-#
-#
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from users.forms import CustomUserForm
+from django.contrib.auth.decorators import login_required
+
+
+def register(request):
+    form = CustomUserForm()
+    if request.method == 'POST':
+        form = CustomUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Registered Successfully!")
+            return redirect('/login')
+
+    context = {'form': form}
+    return render(request, "users/register.html", context)
+
+
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html')
+
 # def LoginPage(request):
 #     if request.user.is_authenticated:
 #         messages.warning(request, "You are already logged in!")
@@ -34,9 +39,9 @@
 #             else:
 #                 messages.success(request, "Invalid Login or password!")
 #                 return redirect('login')
-#         return render(request, "store/auth/login.html")
-#
-#
+#         return render(request, "users/login.html")
+
+
 # def LogoutPage(request):
 #     if request.user.is_authenticated:
 #         logout(request)
