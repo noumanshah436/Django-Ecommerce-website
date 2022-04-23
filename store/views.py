@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from django.contrib import messages
+from .forms import ProductForm
 
 
 # Create your views here.
@@ -41,3 +42,38 @@ def productViews(request, cate_slug, prod_slug):
         messages.warning(request, "No such category found")
         return redirect('collections')
     return render(request, 'store/products/view.html', context)
+
+
+# http://127.0.0.1:8000/addProduct
+def addProduct(request):
+    if request.method == "POST":
+        fm = ProductForm(request.POST, request.FILES)
+        if fm.is_valid():
+            product = fm.save(commit=False)
+            product.seller = request.user
+            product.save()
+            return redirect('collections')
+    else:
+        fm = ProductForm()
+    return render(request, 'store/addProduct.html', {'form': fm})
+
+
+# This funcion will update/edit
+def updateProduct(request, id):
+    if request.method == 'POST':
+        pi = Product.objects.get(pk=id)
+        fm = ProductForm(request.POST, instance=pi)
+        if fm.is_valid():
+            fm.save()
+            return redirect('collections')
+    else:
+        pi = Product.objects.get(pk=id)
+        fm = ProductForm(instance=pi)
+    return render(request, 'store/updateProduct.html', {'form': fm})
+
+
+def deleteProduct(request, id):
+    if request.method == 'POST':
+        product = Product.objects.get(pk=id)
+        product.delete()
+        return redirect('collections')

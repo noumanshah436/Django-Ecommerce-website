@@ -1,3 +1,8 @@
 admin
 nouman   1234
 Shahmeer Baghdad12
+
+
+
+Set-ExecutionPolicy Unrestricted
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force

@@ -1,0 +1,8 @@
+
+change value of field while form save django view” Code Answer
+https://www.codegrepper.com/code-examples/python/frameworks/django/change+value+of+field+while+form+save+django+view
+
+
+
+image error
+https://forum.djangoproject.com/t/image-does-not-save/4664/6

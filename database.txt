@@ -1,0 +1,12 @@
+from store.models import Product
+ p = Product.objects.filter(id=7).first()
+>>> p
+<Product: Prince shoes>
+
+
+89N3PDyZzakoH7W6n8ZrjGDDktjh8iWFG6eKRvi3kvpQ
+from users.models import Profile
+
+user = User.objects.filter(username="Nouman").first()
+
+Profile.objects.create(user=user)

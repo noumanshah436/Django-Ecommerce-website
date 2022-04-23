@@ -126,6 +126,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STATIC_URL = "/static/"
 
 # MEDIA_ROOT : full path of dir where we want django to store our uploaded files
+# MEDIA_URL :  how we access those media files
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
@@ -135,7 +136,7 @@ MEDIA_URL = '/media/'
 
 # my BASE_DIR  =   D:\Python Django Project\Ecommerce Website
 
-# to to change default path if login of a user is successful
+# to change default path if login of a user is successful
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
