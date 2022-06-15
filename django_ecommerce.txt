@@ -46,6 +46,8 @@ part 3:
 https://www.youtube.com/watch?v=q6oxoOxvUMk&list=PL_99hMDlL4d2zsGU5nOgADmRc6A8msXyh&index=8
 
 
+http://localhost/phpmyadmin/
+
 
 
 

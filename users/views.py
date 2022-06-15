@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from users.forms import CustomUserForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
+from django.http.response import JsonResponse
+from store.models import Product, Cart
 
 
 def register(request):
@@ -44,6 +46,7 @@ def profile(request):
 
     return render(request, 'users/profile.html', context)
 
+
 # def LoginPage(request):
 #     if request.user.is_authenticated:
 #         messages.warning(request, "You are already logged in!")
@@ -69,3 +72,27 @@ def profile(request):
 #         logout(request)
 #         messages.warning(request, "Logged out sccessfully!")
 #     return redirect('/')
+
+
+def addToCart(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            prod_id = int(request.POST.get('product_id'))
+            product_check = Product.objects.get(id=prod_id)
+
+            if product_check:
+                if Cart.objects.filter(user=request.user.id, product_id=prod_id):
+                    return JsonResponse({'status': 'Product Already in Cart'})
+                else:
+                    prod_qty = int(request.POST.get('product_qty'))
+                    if product_check.quantity >= prod_qty:
+                        Cart.objects.create(user=request.user, product_id=prod_id, product_qty=prod_qty)
+                        return JsonResponse({'status': 'Product Added Successfully'})
+                    else:
+                        return JsonResponse({'status': "only" + str(product_check.quantity) + "quantity available"})
+            else:
+                return JsonResponse({'status': 'No Such Product Found'})
+        else:
+            return JsonResponse({'status': 'Login to continue'})
+
+    return redirect('/')
