@@ -1,0 +1,139 @@
+{% extends 'store/layouts/main.html' %}
+
+{% block content %}
+
+
+<div class="py-3 bg-primary">
+    <div class="container">
+        <a class="text-white" href="{% url 'home' %}"> Home / </a>
+        <a class="text-white" href="{% url 'cart' %}"> Cart / </a>
+
+    </div>
+</div>
+
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow product_data">
+                    <div class="card-body cartData">
+                        {% if cart %}
+                        {% for item in cart %}
+                        <div class="row product_data">
+                            <div class="col-md-2 my-auto">
+                                <img src="{{ item.product.product_image.url}}" height="70px" width="70px"
+                                     alt="image here">
+                            </div>
+
+                            <div class="col-md-3 my-auto">
+                                <h6>{{item.product.name}}</h6>
+                            </div>
+                            <div class="col-md-2 my-auto">
+                                <h6>{{ item.product.selling_price}}*{{item.product_qty }}</h6>
+
+                            </div>
+                            <div class="col-md-2 my-auto">
+                                <input type="hidden" class="prod_id" value="{{ item.product_id}}">
+                                {% csrf_token %}
+                                {% if item.product.quantity >= item.product_qty %}
+                                <label for="Quantity"> Quantity</label>
+                                <div class="input-group text-center mb-3" style="width:130px">
+                                    <button class="input-group-text changeQuantity decrement-btn">-</button>
+                                    <input type="text" name="quantity" class="form-control qty-input text-center"
+                                           value="{{ item.product_qty}}">
+                                    <button class="input-group-text changeQuantity increment-btn">+</button>
+
+                                </div>
+                                {% else %}
+                                <h6>Out of Stock</h6>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-md-2 my-auto">
+                                <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Remove
+                                </button>
+                            </div>
+
+
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                                <h6>Cart is Empty</h6>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- payment -->
+{% if cart %}
+<div class="py-5">
+<div class="container">
+    <div id="paypal-button-container"></div>
+        <!-- Sample PayPal credentials (client-id) are included -->
+        <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD&intent=capture&enable-funding=venmo"></script>
+        <script>
+          const paypalButtonsComponent = paypal.Buttons({
+              // optional styling for buttons
+              // https://developer.paypal.com/docs/checkout/standard/customize/buttons-style-guide/
+              style: {
+                color: "gold",
+                shape: "rect",
+                layout: "vertical"
+              },
+
+              // set up the transaction
+              createOrder: (data, actions) => {
+                  // pass in any options from the v2 orders create call:
+                  // https://developer.paypal.com/api/orders/v2/#orders-create-request-body
+                  const createOrderPayload = {
+                      purchase_units: [
+                          {
+                              amount: {
+                                  value: "88.44"
+                              }
+                          }
+                      ]
+                  };
+
+                  return actions.order.create(createOrderPayload);
+              },
+
+              // finalize the transaction
+              onApprove: (data, actions) => {
+                  const captureOrderHandler = (details) => {
+                      const payerName = details.payer.name.given_name;
+                      console.log('Transaction completed');
+                  };
+
+                  return actions.order.capture().then(captureOrderHandler);
+              },
+
+              // handle unrecoverable errors
+              onError: (err) => {
+                  console.error('An error prevented the buyer from checking out with PayPal');
+              }
+          });
+
+          paypalButtonsComponent
+              .render("#paypal-button-container")
+              .catch((err) => {
+                  console.error('PayPal Buttons failed to render');
+              });
+        </script>
+</div>
+</div>
+
+{% endif %}
+
+<!-- payment -->
+
+{#    <h1>Categories</h1>#}
+{#    {{ categories }}#}
+{% endblock content %}

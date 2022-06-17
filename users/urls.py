@@ -12,6 +12,9 @@ urlpatterns = [
 
 
     path('add-to-cart/', views.addToCart, name='addToCart'),
+    path('cart/', views.viewCart, name='cart'),
+    path('update-cart/', views.updateCart, name='updatecart'),
+    path('delete-cart-item/', views.deleteCart, name='deleteCart'),
 
 
 ]

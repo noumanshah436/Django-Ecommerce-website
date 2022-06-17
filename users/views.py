@@ -87,7 +87,10 @@ def addToCart(request):
                     prod_qty = int(request.POST.get('product_qty'))
                     if product_check.quantity >= prod_qty:
                         Cart.objects.create(user=request.user, product_id=prod_id, product_qty=prod_qty)
-                        return JsonResponse({'status': 'Product Added Successfully'})
+                        messages.success(request, f'Product Added to Cart Successfully!')
+                        return redirect('/')
+
+                        # return JsonResponse({'status': 'Product Added Successfully'})
                     else:
                         return JsonResponse({'status': "only" + str(product_check.quantity) + "quantity available"})
             else:
@@ -95,4 +98,32 @@ def addToCart(request):
         else:
             return JsonResponse({'status': 'Login to continue'})
 
+    return redirect('/')
+
+@login_required
+def viewCart(request):
+    cart = Cart.objects.filter(user=request.user)
+    context = {"cart": cart}
+    return render(request, 'users/cart.html', context)
+
+
+def updateCart(request):
+    if request.method == "POST":
+        prod_id = int(request.POST.get('product_id'))
+        if Cart.objects.filter(user=request.user.id, product_id=prod_id):
+            prod_qty = int(request.POST.get('product_qty'))
+            cart = Cart.objects.get(user=request.user, product_id=prod_id)
+            cart.product_qty = prod_qty
+            cart.save()
+            return JsonResponse({'status': 'Updated Successfully'})
+    return redirect('/')
+
+def deleteCart(request):
+    if request.method == "POST":
+        prod_id = int(request.POST.get('product_id'))
+        if Cart.objects.filter(user=request.user.id, product_id=prod_id):
+            cartItem = Cart.objects.get(user=request.user, product_id=prod_id)
+            cartItem.delete()
+            return redirect('cart')
+            # return JsonResponse({'status': 'Deleted Successfully'})
     return redirect('/')
