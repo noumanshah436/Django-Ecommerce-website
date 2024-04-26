@@ -1,0 +1,10 @@
+
+
+$ mkdir .venv
+$ pipenv install
+$ python manage.py runserver
+
+
+If there are any pending migrations run:
+$ python manage.py makemigrations
+$ python manage.py migrate

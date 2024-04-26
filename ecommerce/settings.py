@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'store.apps.StoreConfig',
-    "users.apps.UsersConfig"
+    "users.apps.UsersConfig",
+    "crispy_bootstrap4"
 
 ]
 
@@ -75,14 +76,21 @@ WSGI_APPLICATION = "ecommerce.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": "djangoecom",
+#         "HOST": "localhost",
+#         "USER": "root",
+#         "PASSWORD": "",
+#         "PORT": "3306",
+#     }
+# }
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "djangoecom",
-        "HOST": "localhost",
-        "USER": "root",
-        "PASSWORD": "",
-        "PORT": "3306",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 

@@ -1,0 +1,15 @@
+pipenv --python 3.9
+pipenv install
+pipenv shell
+python --version
+pyenv local 3.12.3
+pipenv install Django
+pyenv versions
+pipenv install
+pipenv django-crispy-forms
+pipenv install django-crispy-forms
+pipenv install django-jazzmin
+pipenv install django-phonenumber-field
+pipenv install phonenumbers
+pipenv install Pillow
+

@@ -1,6 +1,7 @@
-admin
-nouman   1234
-Shahmeer Baghdad12
+
+Username: nouman
+Email address: noumanrehman042@gmail.com
+Password: nouman 
 
 
 
