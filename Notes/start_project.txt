@@ -2,6 +2,8 @@
 
 $ mkdir .venv
 $ pipenv install
+$ pipenv shell        # activate environment
+
 $ python manage.py runserver
 
 
